@@ -1,3 +1,5 @@
+package lines;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -53,18 +55,18 @@ public class BestMoveFinder {
                             }/* else {
                                 score = 0;
                                 for (int i = 0; i < statesPerMoveLimit; i++) {
-                                    List<Cell> newTiles = getRandomNewTiles(newBoard);
-                                    for (Cell newTile : newTiles) {
+                                    List<lines.Cell> newTiles = getRandomNewTiles(newBoard);
+                                    for (lines.Cell newTile : newTiles) {
                                         newBoard.set(newTile);
                                     }
-                                    List<Position> p = new ArrayList<>();
-                                    for (Cell newTile : newTiles) {
-                                        p.add(new Position(newTile.row, newTile.col));
+                                    List<lines.Position> p = new ArrayList<>();
+                                    for (lines.Cell newTile : newTiles) {
+                                        p.add(new lines.Position(newTile.row, newTile.col));
                                     }
-                                    Board b = newBoard.clearLines(p);
+                                    lines.Board b = newBoard.clearLines(p);
                                     score += findBestMoveInternal(b, depth + 1).score;
-                                    for (Cell newTile : newTiles) {
-                                        newBoard.set(newTile.row, newTile.col, Board.EMPTY);
+                                    for (lines.Cell newTile : newTiles) {
+                                        newBoard.set(newTile.row, newTile.col, lines.Board.EMPTY);
                                     }
                                 }
                                 score /= statesPerMoveLimit;

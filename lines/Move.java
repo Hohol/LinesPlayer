@@ -1,3 +1,5 @@
+package lines;
+
 public class Move {
     public final Position from;
     public final Position to;
@@ -9,7 +11,7 @@ public class Move {
 
     @Override
     public String toString() {
-        return "Move{" +
+        return "lines.Move{" +
                 "from=" + from +
                 ", to=" + to +
                 '}';

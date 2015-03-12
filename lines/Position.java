@@ -1,3 +1,5 @@
+package lines;
+
 public class Position {
     public final int row;
     public final int col;
@@ -9,7 +11,7 @@ public class Position {
 
     @Override
     public String toString() {
-        return "Position{" +
+        return "lines.Position{" +
                 "row=" + row +
                 ", col=" + col +
                 '}';

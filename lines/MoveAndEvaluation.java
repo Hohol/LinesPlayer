@@ -1,3 +1,5 @@
+package lines;
+
 public class MoveAndEvaluation {
     public final Move move;
     public final double score;

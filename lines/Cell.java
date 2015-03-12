@@ -1,3 +1,5 @@
+package lines;
+
 public class Cell {
     public final int row;
     public final int col;

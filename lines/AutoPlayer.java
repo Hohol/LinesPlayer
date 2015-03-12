@@ -1,4 +1,6 @@
-public class Player {
+package lines;
+
+public class AutoPlayer {
 
     public void play() throws Exception {
         AutoPlayerGameStateReader autoPlayerGameStateReader = new AutoPlayerGameStateReader();
