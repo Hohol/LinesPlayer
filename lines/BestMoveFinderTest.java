@@ -345,6 +345,23 @@ public class BestMoveFinderTest {
         assertEquals(move.from, new Position(3, 4));
     }
 
+    @Test
+    void test13() {
+        Board board = new Board(
+                "" +
+                        "1111.....\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        "...2.....\n" +
+                        "222......"
+        );
+        check(board, new Move(7, 3, 8, 3));
+    }
+
     //-----utils
 
     private void checkGoodBad(Board good, Board bad) {

@@ -174,14 +174,14 @@ public class BestMoveFinder {
             r /= 5;
         }
         if (!board.inside(sx - dx, sy - dy)) {
-            r /= 3;
+            r *= 0.6;
         } else if (board.get(sx - dx, sy - dy) != Board.EMPTY) {
-            r /= 2;
+            r *= 0.75;
         }
         if (!board.inside(x + dx, y + dy)) {
-            r /= 3;
+            r *= 0.6;
         } else if (board.get(x + dx, y + dy) != Board.EMPTY) {
-            r /= 2;
+            r *= 0.75;
         }
 
         return r;
