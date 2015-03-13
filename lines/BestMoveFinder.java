@@ -51,7 +51,7 @@ public class BestMoveFinder {
                             if (depth == depthLimit) {
                                 score = evaluate(newBoard);
                             } else {
-                                score = evaluate(newBoard) + findBestMoveInternal(newBoard, depth + 1).score / 2;
+                                score = evaluate(newBoard) + findBestMoveInternal(newBoard, depth + 1).score / 2 + evaluateRandom(newBoard) / 2;
                             }/* else {
                                 score = 0;
                                 for (int i = 0; i < statesPerMoveLimit; i++) {
@@ -99,34 +99,6 @@ public class BestMoveFinder {
     }
 
     double evaluate(Board board) {
-        double r = evaluate0(board);
-
-        //if (board.getEmptyCnt() > 0) {
-        if (false) {
-            int cnt = 0;
-            double score = 0;
-            for (int i = 0; i < board.getHeight(); i++) {
-                for (int j = 0; j < board.getWidth(); j++) {
-                    if (board.get(i, j) != Board.EMPTY) {
-                        continue;
-                    }
-                    List<Position> newPositions = Arrays.asList(new Position(i, j));
-                    for (int color = 0; color < 7; color++) {
-                        board.set(i, j, (char) (color + '0'));
-                        Board newBoard = board.clearLines(newPositions);
-                        cnt++;
-                        score += evaluate0(newBoard);
-                    }
-                    board.set(i, j, Board.EMPTY);
-                }
-            }
-            r += score / cnt;
-        }
-
-        return r;
-    }
-
-    private double evaluate0(Board board) {
         double r = board.getEmptyCnt() * 100;
         double r2 = 0;
         for (int i = 0; i < board.getHeight(); i++) {
@@ -138,6 +110,40 @@ public class BestMoveFinder {
             }
         }
         return r + r2;
+    }
+
+    private double evaluateRandom(Board board) {
+        if (board.getEmptyCnt() == 0) {
+            return 0;
+        }
+        int cnt = 0;
+        double score = 0;
+        for (int i = 0; i < board.getHeight(); i++) {
+            for (int j = 0; j < board.getWidth(); j++) {
+                if (board.get(i, j) != Board.EMPTY) {
+                    continue;
+                }
+                List<Position> newPositions = Arrays.asList(new Position(i, j));
+                for (int color = 0; color < 7; color++) {
+                    board.set(i, j, (char) (color + '0'));
+                    Board newBoard = board.clearLines(newPositions);
+                    cnt++;
+                    double r = newBoard.getEmptyCnt() * 100;
+                    double r2 = 0;
+                    for (int i1 = 0; i1 < newBoard.getHeight(); i1++) {
+                        for (int j1 = 0; j1 < newBoard.getWidth(); j1++) {
+                            r2 += getScore(newBoard, i1, j1, 0, 1);
+                            r2 += getScore(newBoard, i1, j1, 1, -1);
+                            r2 += getScore(newBoard, i1, j1, 1, 0);
+                            r2 += getScore(newBoard, i1, j1, 1, 1);
+                        }
+                    }
+                    score += r + r2;
+                }
+                board.set(i, j, Board.EMPTY);
+            }
+        }
+        return score / cnt;
     }
 
     private double getScore(Board board, int sx, int sy, int dx, int dy) {

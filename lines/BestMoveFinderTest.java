@@ -312,9 +312,9 @@ public class BestMoveFinderTest {
 
     @Test
     void test10() {
-        Board good = new Board(
+        Board board = new Board(
                 "" +
-                        "...11.11.\n" +
+                        "...11..1.\n" +
                         ".........\n" +
                         ".........\n" +
                         ".........\n" +
@@ -322,21 +322,9 @@ public class BestMoveFinderTest {
                         ".........\n" +
                         ".........\n" +
                         ".........\n" +
-                        "........."
+                        "1........"
         );
-        Board bad = new Board(
-                "" +
-                        "...11....\n" +
-                        ".........\n" +
-                        ".........\n" +
-                        ".........\n" +
-                        ".........\n" +
-                        ".........\n" +
-                        ".........\n" +
-                        ".........\n" +
-                        "...11...."
-        );
-        checkGoodBad(good, bad);
+        check(board, new Move(8, 0, 0, 5));
     }
 
     @Test
