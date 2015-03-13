@@ -11,12 +11,12 @@ public class AutoPlayerGameStateReader {
 
     public AutoPlayerGameStateReader() {
         board = new Board(9, 9);
-        addRandomCells();
+        addRandomCells(5);
     }
 
-    private List<Cell> getRandomNewCells(Board newBoard) {
+    private List<Cell> getRandomNewCells(Board newBoard, int cnt) {
         List<Cell> r = new ArrayList<>();
-        while (r.size() < 3) {
+        while (r.size() < cnt) {
             int p = rnd.nextInt(newBoard.getHeight() * newBoard.getWidth());
             int x = p / newBoard.getWidth();
             int y = p % newBoard.getWidth();
@@ -32,8 +32,8 @@ public class AutoPlayerGameStateReader {
         return board;
     }
 
-    void addRandomCells() {
-        List<Cell> newCells = getRandomNewCells(board);
+    void addRandomCells(int cnt) {
+        List<Cell> newCells = getRandomNewCells(board, cnt);
         List<Position> positions = new ArrayList<>();
         for (Cell newCell : newCells) {
             board.set(newCell);
