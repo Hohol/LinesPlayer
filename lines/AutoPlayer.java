@@ -1,5 +1,7 @@
 package lines;
 
+import java.io.IOException;
+
 public class AutoPlayer {
 
     public static void main(String[] args) throws Exception {
@@ -7,16 +9,17 @@ public class AutoPlayer {
     }
 
     public void play() throws Exception {
-        double sum = 0;
+        /*double sum = 0;
         int matchCnt = 100;
         for (int i = 0; i < matchCnt; i++) {
             sum += playMatch();
         }
-        System.out.println("avg = " + sum / matchCnt);
+        System.out.println("avg = " + sum / matchCnt);/**/
+        playMatch();
         Thread.sleep(100);
     }
 
-    private int playMatch() {
+    private int playMatch() throws IOException {
         int iterationCnt = 0;
         AutoPlayerGameStateReader autoPlayerGameStateReader = new AutoPlayerGameStateReader();
         BestMoveFinder bestMoveFinder = new BestMoveFinder();
@@ -26,17 +29,17 @@ public class AutoPlayer {
             iterationCnt++;
             Board board = autoPlayerGameStateReader.getBoard();
             if (first) {
-                //System.out.println(board);
+                System.out.println(board);
                 first = false;
             }
             Move move = bestMoveFinder.findBestMove(board);
-            //System.out.println(move);
+            System.out.println(move);
 
             int oldEmptyCnt = board.getEmptyCnt();
             autoPlayerGameStateReader.makeMove(move);
             int newEmptyCnt = autoPlayerGameStateReader.getBoard().getEmptyCnt();
 
-            //showMove(autoPlayerGameStateReader.getBoard(), move);
+            showMove(autoPlayerGameStateReader.getBoard(), move);
             if (autoPlayerGameStateReader.lost()) {
                 System.out.println("lost!");
                 System.out.println("iterationCnt = " + iterationCnt);
@@ -46,14 +49,14 @@ public class AutoPlayer {
                 autoPlayerGameStateReader.addRandomCells(3);
             }
             if (board.getEmptyCnt() == 0) {
-                //System.out.println(board);
+                System.out.println(board);
                 System.out.println("lost!");
                 System.out.println("iterationCnt = " + iterationCnt);
                 break;
             }
-            //System.out.println(autoPlayerGameStateReader.getBoard());
+            System.out.println(autoPlayerGameStateReader.getBoard());
             //System.in.read();
-            //System.out.println("iterationCnt = " + iterationCnt);
+            System.out.println("iterationCnt = " + iterationCnt);
         }
         return iterationCnt;
     }

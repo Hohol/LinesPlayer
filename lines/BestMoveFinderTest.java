@@ -8,7 +8,7 @@ import static org.testng.Assert.*;
 
 @Test
 public class BestMoveFinderTest {
-    BestMoveFinder bestMoveFinder = new BestMoveFinder(1);
+    BestMoveFinder bestMoveFinder = new BestMoveFinder();
 
     @Test
     void test() {
@@ -362,10 +362,28 @@ public class BestMoveFinderTest {
         check(board, new Move(7, 3, 8, 3));
     }
 
+    @Test
+    void test14() {
+        Board board = new Board(
+                "" +
+                        "2...5....\n" +
+                        "...5.0000\n" +
+                        ".........\n" +
+                        "....41.45\n" +
+                        "5.......4\n" +
+                        "64.4.....\n" +
+                        "412.3333.\n" +
+                        "....1...2\n" +
+                        "...6.4..6"
+        );
+        Move move = bestMoveFinder.findBestMove(board);
+        assertFalse(move.equals(new Move(1, 8, 1, 4)));
+    }
+
     //-----utils
 
     private void checkGoodBad(Board good, Board bad) {
-        BestMoveFinder bmf = new BestMoveFinder(0);
+        BestMoveFinder bmf = new BestMoveFinder();
         double goodScore = bmf.evaluate(good);
         double badScore = bmf.evaluate(bad);
         assertTrue(goodScore > badScore + 1e-5, "goodScore = " + goodScore + ", badScore = " + badScore);

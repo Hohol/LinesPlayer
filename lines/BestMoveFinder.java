@@ -7,15 +7,7 @@ import java.util.Random;
 public class BestMoveFinder {
     private final Random rnd = new Random(323);
 
-    private final int depthLimit;
-
-    public BestMoveFinder(int depthLimit) {
-        this.depthLimit = depthLimit;
-    }
-
-    public BestMoveFinder() {
-        this(0);
-    }
+    private final int depthLimit = 1;
 
     public Move findBestMove(Board board) {
         return findBestMoveInternal(board, 0).move;

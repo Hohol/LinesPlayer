@@ -5,7 +5,7 @@ import java.io.IOException;
 public class Player {
     public void play() throws IOException {
         GameStateReader gameStateReader = new GameStateReader();
-        BestMoveFinder bestMoveFinder = new BestMoveFinder(1);
+        BestMoveFinder bestMoveFinder = new BestMoveFinder();
         MoveMaker moveMaker = new MoveMaker();
         int iterationCnt = 0;
         while(true) {
